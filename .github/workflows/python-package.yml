@@ -28,13 +28,12 @@ jobs:
     - name: Test with pytest
       run: |
         pytest test.py
-    - name: Check docker installed or not
-      run: docker run hello-world
-    - name: Push to docker hub
-      uses: docker/build-push-action@v1.0.0
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+    - name: Login to DockerHub
+      uses: docker/login-action@v2
       with:
-        username: ${{ secrets.DOCKER_USERNAME }}
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        repository: dandestac/ml-flask:v1.0
-        tag_with_ref: true
+
     
